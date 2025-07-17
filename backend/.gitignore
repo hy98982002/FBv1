@@ -1,0 +1,114 @@
+# UAI 教育平台 - Git 忽略规则
+
+# =============================
+# 🔐 环境配置文件（敏感信息）
+# =============================
+# 忽略所有真实配置文件
+.env
+backend/.env
+frontend/.env
+
+# 保留示例模板
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# =============================
+# 📁 系统和编辑器文件
+# =============================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# 编辑器和IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# =============================
+# 🐍 Python / Django 相关
+# =============================
+# Python缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# Django媒体和静态文件（开发环境）
+media/
+staticfiles/
+collected-static/
+
+# =============================
+# 📦 Node.js / Vue 相关
+# =============================
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 构建输出
+dist/
+dist-ssr/
+build/
+*.local
+
+# =============================
+# 📊 日志和临时文件
+# =============================
+logs/
+*.log
+
+# 测试覆盖率
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# =============================
+# 🚀 部署相关
+# =============================
+# Docker
+docker-compose.override.yml
+
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar 

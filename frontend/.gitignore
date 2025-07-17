@@ -1,0 +1,109 @@
+# UAI 教育平台前端 - Git 忽略规则
+
+# =============================
+# 🔐 环境配置文件（敏感信息）
+# =============================
+# 忽略所有真实配置文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 保留示例模板
+!.env.example
+
+# =============================
+# 📦 Node.js / Vue 相关
+# =============================
+# 依赖包
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 构建输出
+dist/
+dist-ssr/
+build/
+*.local
+
+# =============================
+# 📁 系统和编辑器文件
+# =============================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# 编辑器和IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.cursor/
+*.swp
+*.swo
+*.tmp
+*.temp
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =============================
+# 📊 日志和临时文件
+# =============================
+logs/
+*.log
+
+# 测试覆盖率
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# =============================
+# 🚀 部署相关
+# =============================
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar
+
+# =============================
+# 🧪 测试相关
+# =============================
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# =============================
+# 📱 移动端相关
+# =============================
+# Capacitor
+android/
+ios/
+dist/
+

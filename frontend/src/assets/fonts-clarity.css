@@ -1,0 +1,427 @@
+/**
+ * 字体清晰度优化模块 - UAI教育平台
+ * 目标：在所有设备（特别是Windows 10）上确保字体清晰显示
+ * 原则：磨玻璃效果保持在背景，文字保持清晰
+ */
+
+/* ==================== 基础字体优化 ==================== */
+
+:root {
+  /* 优化字体系列 - Windows 10友好 */
+  --font-family-primary: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', system-ui,
+    -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+
+  /* 字体渲染优化变量 */
+  --font-smoothing: antialiased;
+  --text-rendering: optimizeLegibility;
+  --font-feature-settings: 'liga' 1, 'kern' 1;
+
+  /* 文字阴影增强对比度 */
+  --text-shadow-light: 0 0 1px rgba(0, 0, 0, 0.1);
+  --text-shadow-dark: 0 1px 2px rgba(255, 255, 255, 0.1);
+
+  /* 文字描边 */
+  --text-stroke-subtle: 0.01em transparent;
+  --text-stroke-contrast: 0.5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== 全局字体设置 ==================== */
+
+* {
+  /* 应用优化字体系列 */
+  font-family: var(--font-family-primary);
+
+  /* 字体渲染优化 */
+  -webkit-font-smoothing: var(--font-smoothing);
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: var(--text-rendering);
+  font-feature-settings: var(--font-feature-settings);
+
+  /* Windows 10 特殊优化 */
+  font-smooth: always;
+  -webkit-text-stroke: var(--text-stroke-subtle);
+}
+
+/* 排除图片和媒体元素，避免全局样式影响 */
+img,
+picture,
+video,
+canvas,
+svg,
+.card-img-top,
+[style*='background-image'],
+.course-img,
+.hero-carousel img,
+.carousel-item,
+.img-fluid,
+.img-thumbnail,
+.card-img,
+.hero-image,
+.course-image {
+  /* 重置可能影响图片的字体属性 */
+  font-family: initial !important;
+  -webkit-font-smoothing: initial !important;
+  -moz-osx-font-smoothing: initial !important;
+  text-rendering: initial !important;
+  font-feature-settings: initial !important;
+  font-smooth: initial !important;
+  -webkit-text-stroke: initial !important;
+}
+
+/* FontAwesome图标排除全局样式影响 - 激进修复 */
+i[class*='fa'],
+.fa,
+.fas,
+.far,
+.fal,
+.fab,
+[class^='fa-'],
+[class*=' fa-'],
+.star-icon,
+i.fa-star,
+i.fa-star-half-alt {
+  /* 强制使用FontAwesome专用字体，不受全局字体影响 */
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro', 'Font Awesome 5 Free', 'FontAwesome' !important;
+
+  /* 激进的清晰度保护 */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+
+  /* 强制移除全局字体样式 */
+  font-feature-settings: initial !important;
+  font-smooth: initial !important;
+  -webkit-text-stroke: initial !important;
+
+  /* 彻底清除模糊效果 */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+
+  /* 重置transform */
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* ==================== 文字层级分离 ==================== */
+
+/* 确保文字层级高于模糊背景 */
+.text-layer,
+.font-clear,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button,
+.card-title,
+.card-text,
+.nav-link,
+.navbar-brand,
+.btn,
+.badge,
+input,
+textarea,
+select {
+  position: relative;
+  z-index: 10;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 图片元素专门优化 - 保持图片清晰 */
+img,
+.card-img-top,
+[style*='background-image'],
+picture,
+video,
+.carousel-item img,
+.course-img,
+.card-img,
+div[style*='background-image'],
+.img-fluid,
+.img-thumbnail,
+.card-img,
+.hero-image,
+.course-image {
+  /* 彻底移除所有可能影响图片的效果 */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+
+  /* 强制移除模糊效果 */
+  -webkit-filter: none !important;
+  -moz-filter: none !important;
+  -o-filter: none !important;
+  -ms-filter: none !important;
+
+  /* 图片清晰渲染优化 */
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  image-rendering: pixelated !important;
+  image-rendering: auto !important;
+
+  /* 移除可能影响图片的字体设置 */
+  -webkit-font-smoothing: initial !important;
+  -moz-osx-font-smoothing: initial !important;
+  text-rendering: auto !important;
+
+  /* 确保图片清晰显示 */
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+
+  /* 强制硬件加速 */
+  will-change: auto !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+
+  /* 移除可能的混合模式 */
+  mix-blend-mode: normal !important;
+  -webkit-mix-blend-mode: normal !important;
+}
+
+/* ==================== 高对比度文字 ==================== */
+
+.high-contrast-text,
+.card-title,
+.navbar-brand,
+.btn,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  text-shadow: var(--text-shadow-light);
+}
+
+/* 深色模式下的高对比度 */
+@media (prefers-color-scheme: dark) {
+  .high-contrast-text,
+  .card-title,
+  .navbar-brand,
+  .btn,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-shadow: var(--text-shadow-dark);
+  }
+}
+
+/* ==================== Windows高DPI优化 ==================== */
+
+/* Windows高DPI显示器优化 */
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  body {
+    font-size: 17px;
+    letter-spacing: 0.01em;
+  }
+
+  .card-title {
+    font-weight: 500; /* 统一调整为500 */
+    letter-spacing: 0.02em;
+  }
+
+  .btn {
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Windows 10特殊优化 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  * {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    -ms-text-size-adjust: 100%;
+  }
+}
+
+/* ==================== 最小字体大小保护 ==================== */
+
+body {
+  font-size: max(16px, 1rem); /* 防止字体过小 */
+  line-height: 1.6; /* 提高可读性 */
+}
+
+/* ==================== 特殊元素优化 ==================== */
+
+/* 按钮文字清晰度 */
+.btn {
+  font-weight: 500;
+  -webkit-text-stroke: var(--text-stroke-contrast);
+  text-shadow: var(--text-shadow-light);
+}
+
+/* 导航链接清晰度 */
+.nav-link {
+  font-weight: 500;
+  text-shadow: var(--text-shadow-light);
+}
+
+/* 卡片标题清晰度 */
+.card-title {
+  font-weight: 500; /* 统一调整为500 */
+  text-shadow: var(--text-shadow-light);
+  -webkit-text-stroke: var(--text-stroke-contrast);
+}
+
+/* 表单输入清晰度 */
+input,
+textarea,
+select {
+  font-weight: 400;
+  -webkit-text-stroke: var(--text-stroke-subtle);
+}
+
+/* ==================== 磨玻璃背景分离 ==================== */
+
+/* 背景磨玻璃效果 - 不影响文字 */
+.glass-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 低强度磨玻璃 - 用于文字密集区域 */
+.glass-background.low-blur {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* 中强度磨玻璃 - 用于一般背景 */
+.glass-background.medium-blur {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* 高强度磨玻璃 - 用于装饰性背景 */
+.glass-background.high-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ==================== 响应式字体优化 ==================== */
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+  body {
+    font-size: max(16px, 1rem);
+    line-height: 1.5;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 500; /* 统一调整为500 */
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+}
+
+/* 大屏设备优化 */
+@media (min-width: 1200px) {
+  body {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 500; /* 统一调整为500 */
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+/* 强制清晰文字 */
+.force-clear-text {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  z-index: 100 !important;
+  font-weight: 500 !important;
+  text-shadow: var(--text-shadow-light) !important;
+  -webkit-text-stroke: var(--text-stroke-contrast) !important;
+}
+
+/* 超高对比度文字 */
+.ultra-contrast-text {
+  font-weight: 500 !important; /* 统一调整为500 */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 调试类 - 帮助识别文字层级 */
+.debug-text-layer {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+  outline: 1px solid red !important;
+}
+
+/* ==================== FontAwesome图标专门保护 ==================== */
+
+/* FontAwesome图标专门保护 - 确保不受图片优化影响 */
+i[class*='fa'],
+.fa,
+.fas,
+.far,
+.fal,
+.fab,
+.fad,
+.fass,
+.fasr,
+[class^='fa-'],
+[class*=' fa-'],
+i[class*='fa-star'],
+.fas.fa-star,
+.far.fa-star,
+.fas.fa-star-half-alt {
+  /* 恢复FontAwesome图标的正常渲染 */
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro', 'Font Awesome 5 Free',
+    'Font Awesome 5 Pro', 'FontAwesome' !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+  font-feature-settings: normal !important;
+
+  /* 彻底移除可能影响图标的图片优化属性 */
+  image-rendering: auto !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  -moz-filter: none !important;
+  -o-filter: none !important;
+  -ms-filter: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  will-change: auto !important;
+
+  /* 确保图标清晰显示 */
+  font-display: block !important;
+  font-weight: inherit !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  /* 移除可能的混合模式影响 */
+  mix-blend-mode: normal !important;
+  -webkit-mix-blend-mode: normal !important;
+
+  /* 强制重置可能影响的属性 */
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+}
